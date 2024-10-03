@@ -9,6 +9,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -99,7 +101,9 @@ public class OtherworldTeleportItem extends Item {
     }
 
     private void closeGame() {
-        Minecraft.getInstance().close();
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> () -> {
+            Minecraft.getInstance().close();
+        });
     }
 
     private void runBatchFile(String batPath) throws IOException {
