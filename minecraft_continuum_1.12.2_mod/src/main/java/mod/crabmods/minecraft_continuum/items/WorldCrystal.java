@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -83,9 +85,7 @@ public class WorldCrystal extends Item {
     if (world.isRemote) {
       // Run the batch file to load the new world
       runBatchFile(scriptPath);
-      // Close current game instance (no direct equivalent in 1.12.2, just notify)
-      player.sendMessage(
-          new TextComponentTranslation("message.minecraft_continuum.client_closing"));
+      Minecraft.getMinecraft().shutdown();
     }
 
     if (!world.isRemote) {
