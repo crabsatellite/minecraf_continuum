@@ -9,17 +9,17 @@ import java.nio.file.Path;
 import java.util.List;
 
 @Mod.EventBusSubscriber(modid = MinecraftContinuum.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ModConfigHandler {
+public class ConfigHandler {
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec CONFIG;
 
-    // List of Python script paths
-    public static ForgeConfigSpec.ConfigValue<List<? extends String>> pythonScriptPaths;
+    // List of world paths
+    public static ForgeConfigSpec.ConfigValue<List<? extends String>> worldPaths;
 
     static {
         BUILDER.push("General");
-        pythonScriptPaths = BUILDER.comment("List of paths to the Python scripts to be executed")
-                .defineList("pythonScriptPaths", List.of("config/minecraft_continuum/script1.py", "config/minecraft_continuum/script2.py"),
+        worldPaths = BUILDER.comment("List of paths to the world files")
+                .defineList("worldPaths", List.of("config/minecraft_continuum/world1", "config/minecraft_continuum/world2"),
                         obj -> obj instanceof String);
         BUILDER.pop();
         CONFIG = BUILDER.build();

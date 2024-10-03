@@ -1,6 +1,6 @@
 package com.crabmods.minecraft_continuum;
 
-import com.crabmods.minecraft_continuum.config.ModConfigHandler;
+import com.crabmods.minecraft_continuum.config.ConfigHandler;
 import com.crabmods.minecraft_continuum.registers.BlocksRegister;
 import com.crabmods.minecraft_continuum.registers.ItemGroup;
 import com.crabmods.minecraft_continuum.registers.ItemRegister;
@@ -30,7 +30,7 @@ public class MinecraftContinuum {
 
         // Load the configuration before item registration
         Path configPath = FMLPaths.CONFIGDIR.get().resolve(MODID + ".toml");
-        ModConfigHandler.loadConfig(ModConfigHandler.CONFIG, configPath);
+        ConfigHandler.loadConfig(ConfigHandler.CONFIG, configPath);
 
         // Register blocks, creative tabs, and items
         BlocksRegister.register(modEventBus);

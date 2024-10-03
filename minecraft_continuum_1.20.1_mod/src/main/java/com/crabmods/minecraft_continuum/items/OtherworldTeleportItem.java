@@ -74,21 +74,11 @@ public class OtherworldTeleportItem extends Item {
         // e.g., polling or checking for certain conditions that indicate the new world is loaded
 
         new Thread(() -> {
-            // Simulate a waiting period for the new Minecraft instance to load
-            try {
-                // Wait for the new instance to launch (you'll want to improve this with actual checks)
-                Thread.sleep(5000);
+            player.sendSystemMessage(Component.literal("New world loaded successfully!"));
 
-                // After detection, notify player
-                player.sendSystemMessage(Component.literal("New world loaded successfully!"));
+            // Close current instance if needed
+            closeGame();
 
-                // Close current instance if needed
-                closeGame();
-
-            } catch (InterruptedException e) {
-                player.sendSystemMessage(Component.literal("Error while waiting for new world to load: " + e.getMessage()));
-                e.printStackTrace();
-            }
         }).start();
     }
 
@@ -96,10 +86,10 @@ public class OtherworldTeleportItem extends Item {
     public Component getName(ItemStack stack) {
         // Get the path of the script
         Path path = Paths.get(scriptPath);
-        // Get the parent of the parent directory (the "grandparent")
-        String grandparentDirectory = path.getParent().getParent().getFileName().toString();
+        // Get the directory
+        String worldDirectory = path.getParent().getParent().getFileName().toString();
         // Return a translatable component with the dynamic content
-        return Component.literal("Teleport to " + grandparentDirectory);
+        return Component.literal("Teleport to " + worldDirectory);
     }
 
     @Override

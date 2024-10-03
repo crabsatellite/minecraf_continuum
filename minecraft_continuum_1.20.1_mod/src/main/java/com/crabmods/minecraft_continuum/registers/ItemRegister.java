@@ -1,7 +1,7 @@
 package com.crabmods.minecraft_continuum.registers;
 
 import com.crabmods.minecraft_continuum.MinecraftContinuum;
-import com.crabmods.minecraft_continuum.config.ModConfigHandler;
+import com.crabmods.minecraft_continuum.config.ConfigHandler;
 import com.crabmods.minecraft_continuum.items.OtherworldTeleportItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -31,7 +31,7 @@ public class ItemRegister {
     // Register items based on the number of paths in the config
     private static void registerItemsFromConfig() {
         // Get the list of script paths from config
-        List<? extends String> scriptPaths = ModConfigHandler.pythonScriptPaths.get();
+        List<? extends String> scriptPaths = ConfigHandler.worldPaths.get();
 
         // Check if the config contains any paths
         if (scriptPaths == null || scriptPaths.isEmpty()) {
@@ -46,7 +46,7 @@ public class ItemRegister {
 
             // Register each item with a unique name and associate it with the corresponding path
             TELEPORT_ITEMS.add(ITEMS.register("otherworld_teleport_item_" + i,
-                    () -> new OtherworldTeleportItem(new Item.Properties(), path)));
+                    () -> new OtherworldTeleportItem(new Item.Properties(), path + "\\PCL\\LatestLaunch.bat")));
         }
     }
 }
