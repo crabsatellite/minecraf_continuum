@@ -1,13 +1,10 @@
 {
-  "itemGroup.minecraft_continuum_tab": "世界连结",
-  "item.minecraft_continuum.otherworld_teleport_item_0": "传送到世界 0",
-  "item.minecraft_continuum.otherworld_teleport_item_1": "传送到世界 1",
-  "item.minecraft_continuum.otherworld_teleport_item_2": "传送到世界 2",
-  "item.minecraft_continuum.otherworld_teleport_item_3": "传送到世界 3",
-  "item.minecraft_continuum.otherworld_teleport_item_4": "传送到世界 4",
-  "item.minecraft_continuum.otherworld_teleport_item_5": "传送到世界 5",
-  "item.minecraft_continuum.otherworld_teleport_item_6": "传送到世界 6",
-  "item.minecraft_continuum.otherworld_teleport_item_7": "传送到世界 7",
-  "item.minecraft_continuum.otherworld_teleport_item_8": "传送到世界 8",
-  "item.minecraft_continuum.otherworld_teleport_item_9": "传送到世界 9"
+  "itemGroup.minecraft_continuum_tab": "World Continuum",
+  "item.minecraft_continuum.otherworld_teleport_item": "World Crystal (%s)",
+  "message.minecraft_continuum.invalid_world_path": "The specified World Crystal is invalid or not bound to any world.",
+  "message.minecraft_continuum.preparing_teleportation": "Preparing for teleportation...",
+  "message.minecraft_continuum.teleporting_to_world": "Teleporting to World %s...",
+  "message.minecraft_continuum.failed_to_execute_script": "Failed to execute script: %s",
+  "message.minecraft_continuum.loading_new_world": "Loading the new world...",
+  "message.minecraft_continuum.new_world_loaded": "The new world has successfully loaded!"
 }

@@ -8,8 +8,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -31,25 +29,26 @@ public class OtherworldTeleportItem extends Item {
         // Verify the script path before attempting any teleportation
         if (!isValidWorldDirectory(scriptPath)) {
             if (level.isClientSide) {
-                player.sendSystemMessage(Component.literal("The specified world path is not valid or not bound to any world."));
+                player.sendSystemMessage(Component.translatable("message.minecraft_continuum.invalid_world_path"));
             }
             return InteractionResultHolder.fail(player.getItemInHand(hand));
         }
 
         if (isServerSide(level)) {
-            player.sendSystemMessage(Component.literal("Preparing teleportation..."));
+            player.sendSystemMessage(Component.translatable("message.minecraft_continuum.preparing_teleportation"));
         }
 
         CompletableFuture.runAsync(() -> {
             try {
                 if (isServerSide(level)) {
-                    player.sendSystemMessage(Component.literal("Teleporting to World 1..."));
+                    String worldDirectory = Paths.get(scriptPath).getParent().getParent().getFileName().toString();
+                    player.sendSystemMessage(Component.translatable("message.minecraft_continuum.teleporting_to_world", worldDirectory));
                 }
                 if (level.isClientSide) {
                     teleportAndRunScript(player);
                 }
             } catch (IOException e) {
-                player.sendSystemMessage(Component.literal("Failed to execute Python script: " + e.getMessage()));
+                player.sendSystemMessage(Component.translatable("message.minecraft_continuum.failed_to_execute_script", e.getMessage()));
                 e.printStackTrace();
             }
         });
@@ -64,7 +63,7 @@ public class OtherworldTeleportItem extends Item {
         // Handle logic only on the client side
         if (isServerSide(level)) {
             // Display a loading message in the HUD
-            player.sendSystemMessage(Component.literal("Loading new world..."));
+            player.sendSystemMessage(Component.translatable("message.minecraft_continuum.loading_new_world"));
         }
 
         if (level.isClientSide) {
@@ -76,7 +75,7 @@ public class OtherworldTeleportItem extends Item {
 
         if (isServerSide(level)) {
             // Notify the client that the world has been loaded
-            player.sendSystemMessage(Component.literal("New world loaded successfully!"));
+            player.sendSystemMessage(Component.translatable("message.minecraft_continuum.new_world_loaded"));
         }
     }
 
@@ -86,9 +85,10 @@ public class OtherworldTeleportItem extends Item {
         Path path = Paths.get(scriptPath);
         String worldDirectory = path.getParent().getParent().getFileName().toString();
 
-        // Return dynamic item name
-        return Component.literal("Teleport to " + worldDirectory);
+        // Return dynamic item name using translation
+        return Component.translatable("item.minecraft_continuum.otherworld_teleport_item", worldDirectory);
     }
+
 
     @Override
     public boolean isFoil(ItemStack stack) {
@@ -110,16 +110,13 @@ public class OtherworldTeleportItem extends Item {
 
     private boolean isValidWorldDirectory(String scriptPath) {
         // Check if the path exists and is a directory
-        Logger logger = LogManager.getLogger();
         Path path = Paths.get(scriptPath).getParent().getParent();
         if (!Files.exists(path) || !Files.isDirectory(path)) {
-            logger.error(path + " does not exist or is not a directory.");
             return false;
         }
 
         // Check for the presence of a ".minecraft" folder in the grandparent directory
         if (Files.notExists(path.resolve(".minecraft"))) {
-            logger.error("No .minecraft folder found in " + path);
             return false;
         }
 

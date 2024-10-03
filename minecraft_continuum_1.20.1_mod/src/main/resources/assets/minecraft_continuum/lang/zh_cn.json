@@ -1,8 +1,10 @@
 {
-  "itemGroup.chifanla_jewel_box_tab": "吃饭啦宝盒",
-  "block.chifanla_jewel_box.conveyor_belt": "传送带",
-  "block.chifanla_jewel_box.pink_aercloud": "粉红境云",
-  "block.chifanla_jewel_box.green_aercloud": "绿色境云",
-  "block.chifanla_jewel_box.storm_aercloud": "风暴境云",
-  "block.chifanla_jewel_box.purple_aercloud": "紫色境云"
+  "itemGroup.minecraft_continuum_tab": "世界连结",
+  "item.minecraft_continuum.otherworld_teleport_item": "世界结晶 (%s)",
+  "message.minecraft_continuum.invalid_world_path": "指定的世界结晶无效，或未绑定任何世界。",
+  "message.minecraft_continuum.preparing_teleportation": "正在准备传送...",
+  "message.minecraft_continuum.teleporting_to_world": "正在传送至世界1...",
+  "message.minecraft_continuum.failed_to_execute_script": "执行脚本失败：%s",
+  "message.minecraft_continuum.loading_new_world": "正在加载新的世界...",
+  "message.minecraft_continuum.new_world_loaded": "新世界加载成功！"
 }
