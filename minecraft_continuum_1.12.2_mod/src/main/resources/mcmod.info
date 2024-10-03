@@ -1,0 +1,18 @@
+[
+  {
+    "modid": "minecraft_continuum",
+    "name": "MineCraft Continuum",
+    "description": "MineCraft Continuum is a mod that allows you to travel to different versions of Minecraft.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      "CrabMods"
+    ],
+    "credits": "CrabMods",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
