@@ -92,8 +92,8 @@ public class WorldCrystal extends Item {
 
     @Override
     public boolean isFoil(ItemStack stack) {
-        // Make the item appear enchanted
-        return true;
+        // Show the item as shiny if the world directory is valid
+        return isValidWorldDirectory(scriptPath);
     }
 
     private void runBatchFile(String batPath) throws IOException {
