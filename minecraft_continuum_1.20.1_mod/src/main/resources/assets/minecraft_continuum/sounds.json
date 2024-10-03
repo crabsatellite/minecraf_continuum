@@ -1,0 +1,16 @@
+{
+  "block.conveyor_belt": {
+    "sounds": [
+      {
+        "name": "chifanla_jewel_box:block/conveyor_belt"
+      }
+    ]
+  },
+  "block.aercloud_bounce": {
+    "sounds": [
+      {
+        "name": "chifanla_jewel_box:block/aercloud_bounce"
+      }
+    ]
+  }
+}
