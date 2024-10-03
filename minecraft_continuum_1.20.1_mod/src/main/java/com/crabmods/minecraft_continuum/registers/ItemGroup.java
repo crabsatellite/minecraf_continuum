@@ -21,12 +21,12 @@ public class ItemGroup {
                     () ->
                             CreativeModeTab.builder()
                                     // Set the tab icon to one of your items (e.g., the first teleport item)
-                                    .icon(() -> new ItemStack(ItemRegister.TELEPORT_ITEMS.isEmpty() ? net.minecraft.world.item.Items.BARRIER : ItemRegister.TELEPORT_ITEMS.get(0).get()))
+                                    .icon(() -> new ItemStack(ItemRegister.WORLD_CRYSTALS.isEmpty() ? net.minecraft.world.item.Items.BARRIER : ItemRegister.WORLD_CRYSTALS.get(0).get()))
                                     .title(Component.translatable("itemGroup.minecraft_continuum_tab"))
                                     .displayItems(
                                             (pParameters, pOutput) -> {
                                                 // Add all items in TELEPORT_ITEMS to the tab
-                                                ItemRegister.TELEPORT_ITEMS.forEach(item -> pOutput.accept(item.get()));
+                                                ItemRegister.WORLD_CRYSTALS.forEach(item -> pOutput.accept(item.get()));
                                             })
                                     .build());
 

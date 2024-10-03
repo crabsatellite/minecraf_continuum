@@ -1,7 +1,7 @@
 {
   "itemGroup.minecraft_continuum_tab": "World Continuum",
-  "item.minecraft_continuum.otherworld_teleport_item": "World Crystal (%s)",
-  "message.minecraft_continuum.invalid_world_path": "The specified World Crystal is invalid or not bound to any world.",
+  "item.minecraft_continuum.world_crystal": "World Crystal (%s)",
+  "message.minecraft_continuum.invalid_world_path": "No energy can be sensed from this world crystal...",
   "message.minecraft_continuum.preparing_teleportation": "Preparing for teleportation...",
   "message.minecraft_continuum.teleporting_to_world": "Teleporting to World %s...",
   "message.minecraft_continuum.failed_to_execute_script": "Failed to execute script: %s",

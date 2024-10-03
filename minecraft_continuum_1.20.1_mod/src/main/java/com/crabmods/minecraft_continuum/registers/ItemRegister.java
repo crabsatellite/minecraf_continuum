@@ -2,7 +2,7 @@ package com.crabmods.minecraft_continuum.registers;
 
 import com.crabmods.minecraft_continuum.MinecraftContinuum;
 import com.crabmods.minecraft_continuum.config.ConfigHandler;
-import com.crabmods.minecraft_continuum.items.OtherworldTeleportItem;
+import com.crabmods.minecraft_continuum.items.WorldCrystal;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -17,7 +17,7 @@ public class ItemRegister {
             DeferredRegister.create(ForgeRegistries.ITEMS, MinecraftContinuum.MODID);
 
     // List to store dynamically generated item references
-    public static final List<RegistryObject<Item>> TELEPORT_ITEMS = new ArrayList<>();
+    public static final List<RegistryObject<Item>> WORLD_CRYSTALS = new ArrayList<>();
 
     // Register the deferred register to the event bus
     public static void register(IEventBus eventBus) {
@@ -44,8 +44,8 @@ public class ItemRegister {
                     : "Empty World"; // Use a default path if the list is too short
 
             // Register each item with a unique name and associate it with the corresponding path
-            TELEPORT_ITEMS.add(ITEMS.register("otherworld_teleport_item_" + i,
-                    () -> new OtherworldTeleportItem(new Item.Properties(), path + "\\PCL\\LatestLaunch.bat")));
+            WORLD_CRYSTALS.add(ITEMS.register("world_crystal_" + i,
+                    () -> new WorldCrystal(new Item.Properties(), path + "\\PCL\\LatestLaunch.bat")));
         }
     }
 

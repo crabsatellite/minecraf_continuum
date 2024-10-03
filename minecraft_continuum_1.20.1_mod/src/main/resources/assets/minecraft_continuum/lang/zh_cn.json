@@ -1,7 +1,7 @@
 {
   "itemGroup.minecraft_continuum_tab": "世界连结",
-  "item.minecraft_continuum.otherworld_teleport_item": "世界结晶 (%s)",
-  "message.minecraft_continuum.invalid_world_path": "指定的世界结晶无效，或未绑定任何世界。",
+  "item.minecraft_continuum.world_crystal": "世界结晶 (%s)",
+  "message.minecraft_continuum.invalid_world_path": "从这个世界结晶中没有感受到任何能量...",
   "message.minecraft_continuum.preparing_teleportation": "正在准备传送...",
   "message.minecraft_continuum.teleporting_to_world": "正在传送至世界1...",
   "message.minecraft_continuum.failed_to_execute_script": "执行脚本失败：%s",

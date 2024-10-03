@@ -15,11 +15,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.concurrent.CompletableFuture;
 
-public class OtherworldTeleportItem extends Item {
+public class WorldCrystal extends Item {
 
     private final String scriptPath;
 
-    public OtherworldTeleportItem(Properties properties, String scriptPath) {
+    public WorldCrystal(Properties properties, String scriptPath) {
         super(properties);
         this.scriptPath = scriptPath; // Store the script path for this item
     }
@@ -86,7 +86,7 @@ public class OtherworldTeleportItem extends Item {
         String worldDirectory = path.getParent().getParent().getFileName().toString();
 
         // Return dynamic item name using translation
-        return Component.translatable("item.minecraft_continuum.otherworld_teleport_item", worldDirectory);
+        return Component.translatable("item.minecraft_continuum.world_crystal", worldDirectory);
     }
 
 
