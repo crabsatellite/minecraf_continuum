@@ -25,28 +25,28 @@ public class ItemRegister {
         ITEMS.register(eventBus);
 
         // Then, add items based on the config
-        registerItemsFromConfig();
+        registerFixedNumberOfItems();
     }
 
-    // Register items based on the number of paths in the config
-    private static void registerItemsFromConfig() {
+    // Register items based on a fixed number of 10
+    private static void registerFixedNumberOfItems() {
         // Get the list of script paths from config
         List<? extends String> scriptPaths = ConfigHandler.worldPaths.get();
 
-        // Check if the config contains any paths
-        if (scriptPaths == null || scriptPaths.isEmpty()) {
-            // If no paths are present in the config, don't register any items
-            System.out.println("No script paths found in config, skipping item registration.");
-            return;
-        }
+        // Set the number of items to register
+        int itemsToRegister = 10;
 
-        // Loop through each script path to create a corresponding item
-        for (int i = 0; i < scriptPaths.size(); i++) {
-            String path = scriptPaths.get(i);
+        // Loop to register exactly 10 items
+        for (int i = 0; i < itemsToRegister; i++) {
+            // If scriptPaths has fewer paths than 10, repeat paths or use a default value
+            String path = (scriptPaths != null && !scriptPaths.isEmpty() && i < scriptPaths.size())
+                    ? scriptPaths.get(i)
+                    : "Empty World"; // Use a default path if the list is too short
 
             // Register each item with a unique name and associate it with the corresponding path
             TELEPORT_ITEMS.add(ITEMS.register("otherworld_teleport_item_" + i,
                     () -> new OtherworldTeleportItem(new Item.Properties(), path + "\\PCL\\LatestLaunch.bat")));
         }
     }
+
 }

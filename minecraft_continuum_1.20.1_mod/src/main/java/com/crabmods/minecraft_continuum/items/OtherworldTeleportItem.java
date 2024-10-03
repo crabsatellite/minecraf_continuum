@@ -1,6 +1,5 @@
 package com.crabmods.minecraft_continuum.items;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -10,6 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.concurrent.CompletableFuture;
@@ -25,9 +25,18 @@ public class OtherworldTeleportItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        // Verify the script path before attempting any teleportation
+        if (!isValidWorldDirectory(scriptPath)) {
+            if (level.isClientSide) {
+                player.sendSystemMessage(Component.literal("The specified world path is not valid or not bound to any world."));
+            }
+            return InteractionResultHolder.fail(player.getItemInHand(hand));
+        }
+
         if (isServerSide(level)) {
             player.sendSystemMessage(Component.literal("Preparing teleportation..."));
         }
+
         CompletableFuture.runAsync(() -> {
             try {
                 if (isServerSide(level)) {
@@ -54,20 +63,17 @@ public class OtherworldTeleportItem extends Item {
             // Display a loading message in the HUD
             player.sendSystemMessage(Component.literal("Loading new world..."));
         }
+
         if (level.isClientSide) {
             // Run the batch file to load the new world
             runBatchFile(scriptPath);
-            closeClient();
+            // No longer closing the client here, keeping the game running
         }
+
         if (isServerSide(level)) {
             // Notify the client that the world has been loaded
             player.sendSystemMessage(Component.literal("New world loaded successfully!"));
         }
-    }
-
-    private void closeClient() {
-        // Close the client
-        Minecraft.getInstance().close();
     }
 
     @Override
@@ -96,5 +102,21 @@ public class OtherworldTeleportItem extends Item {
 
     private boolean isServerSide(Level level) {
         return !level.isClientSide && level.getServer() != null;
+    }
+
+    private boolean isValidWorldDirectory(String scriptPath) {
+        // Check if the path exists and is a directory
+        Path path = Paths.get(scriptPath);
+        if (!Files.exists(path) || !Files.isDirectory(path)) {
+            return false;
+        }
+
+        // Check for the presence of a ".minecraft" folder in the parent directory
+        Path parentDirectory = path.getParent().getParent(); // Assuming the structure allows reaching .minecraft
+        if (parentDirectory == null || !Files.isDirectory(parentDirectory.resolve(".minecraft"))) {
+            return false;
+        }
+
+        return true;
     }
 }
