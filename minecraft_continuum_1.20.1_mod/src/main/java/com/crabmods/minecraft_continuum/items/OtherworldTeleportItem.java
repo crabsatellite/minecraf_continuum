@@ -1,5 +1,6 @@
 package com.crabmods.minecraft_continuum.items;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -7,6 +8,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -67,7 +70,8 @@ public class OtherworldTeleportItem extends Item {
         if (level.isClientSide) {
             // Run the batch file to load the new world
             runBatchFile(scriptPath);
-            // No longer closing the client here, keeping the game running
+            // Close current game instance
+            Minecraft.getInstance().close();
         }
 
         if (isServerSide(level)) {
@@ -106,14 +110,16 @@ public class OtherworldTeleportItem extends Item {
 
     private boolean isValidWorldDirectory(String scriptPath) {
         // Check if the path exists and is a directory
-        Path path = Paths.get(scriptPath);
+        Logger logger = LogManager.getLogger();
+        Path path = Paths.get(scriptPath).getParent().getParent();
         if (!Files.exists(path) || !Files.isDirectory(path)) {
+            logger.error(path + " does not exist or is not a directory.");
             return false;
         }
 
-        // Check for the presence of a ".minecraft" folder in the parent directory
-        Path parentDirectory = path.getParent().getParent(); // Assuming the structure allows reaching .minecraft
-        if (parentDirectory == null || !Files.isDirectory(parentDirectory.resolve(".minecraft"))) {
+        // Check for the presence of a ".minecraft" folder in the grandparent directory
+        if (Files.notExists(path.resolve(".minecraft"))) {
+            logger.error("No .minecraft folder found in " + path);
             return false;
         }
 
