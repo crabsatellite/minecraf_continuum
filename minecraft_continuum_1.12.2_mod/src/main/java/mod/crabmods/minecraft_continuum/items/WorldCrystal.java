@@ -108,7 +108,7 @@ public class WorldCrystal extends Item {
 
   @Override
   public boolean hasEffect(ItemStack stack) {
-    // Show the item as shiny if the world directory is valid
+    // Show the items as shiny if the world directory is valid
     return isValidWorldDirectory(scriptPath);
   }
 

@@ -1,6 +1,6 @@
 {
-  "parent": "item/generated",
+  "parent": "builtin/generated",
   "textures": {
-    "layer0": "minecraft_continuum:item/world_crystal"
+    "layer0": "minecraft_continuum:items/world_crystal"
   }
 }

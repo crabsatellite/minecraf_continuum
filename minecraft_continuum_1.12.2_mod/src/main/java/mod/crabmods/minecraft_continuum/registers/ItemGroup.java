@@ -1,7 +1,7 @@
 package mod.crabmods.minecraft_continuum.registers;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items; // Import Items class for item references
+import net.minecraft.init.Items; // Import Items class for items references
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -15,7 +15,7 @@ public class ItemGroup {
         @Override
         @SideOnly(Side.CLIENT)
         public ItemStack getTabIconItem() {
-          // Set the tab icon to the first registered item or a fallback item
+          // Set the tab icon to the first registered items or a fallback items
           return ItemRegister.WORLD_CRYSTALS.isEmpty()
               ? new ItemStack(Items.AIR)
               : new ItemStack(ItemRegister.WORLD_CRYSTALS.get(0));
@@ -24,7 +24,7 @@ public class ItemGroup {
         @Override
         @SideOnly(Side.CLIENT)
         public void displayAllRelevantItems(net.minecraft.util.NonNullList<ItemStack> items) {
-          // Add all item in WORLD_CRYSTALS to the tab
+          // Add all items in WORLD_CRYSTALS to the tab
           ItemRegister.WORLD_CRYSTALS.forEach(item -> items.add(new ItemStack(item)));
         }
       };

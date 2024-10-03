@@ -1,13 +1,12 @@
 package mod.crabmods.minecraft_continuum.config;
 
-import mod.crabmods.minecraft_continuum.MinecraftContinuum;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import mod.crabmods.minecraft_continuum.MinecraftContinuum;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ConfigHandler {
   public static Configuration config;
@@ -31,13 +30,20 @@ public class ConfigHandler {
     // Read the config file
     config.load();
 
-    // Read world paths from config, or use default paths if not set
+// Read world paths from config, or use default paths if not set
     String[] paths =
-        config.getStringList(
-            "worldPaths",
-            "General",
-            DEFAULT_WORLD_PATHS.toArray(new String[0]),
-            "List of paths to the world files\nExample: worldPaths = [\"C:\\\\Users\\\\User\\\\AppData\\\\Roaming\", \"E:\\\\Minecraft\\\\World_1.12.2\"]");
+            config.getStringList(
+                    "worldPaths",
+                    "General",
+                    DEFAULT_WORLD_PATHS.toArray(new String[0]),
+                    "List of paths to the world files. Paths should be absolute.\n" +
+                            "Example:\n" +
+                            "S:worldPaths <\n" +
+                            "    C:\\\\Users\\\\User\\\\AppData\\\\Roaming\\\\MinecraftWorld1\n" +
+                            "    E:\\\\Games\\\\Minecraft\\\\World_1.12.2\n" +
+                            "    D:\\\\MinecraftSaves\\\\World3\n" +
+                            "    ...\n" +
+                            ">");
 
     worldPaths = new ArrayList<>(Arrays.asList(paths));
 
