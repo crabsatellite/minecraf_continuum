@@ -1,5 +1,6 @@
 package mod.crabmods.minecraft_continuum;
 
+import mod.crabmods.minecraft_continuum.registers.ItemRegister;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -21,6 +22,7 @@ public class MinecraftContinuum {
   @EventHandler
   public void preInit(FMLPreInitializationEvent event) {
     logger = event.getModLog();
+    ItemRegister.registerItems();
   }
 
   @EventHandler

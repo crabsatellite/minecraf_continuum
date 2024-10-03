@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "inventory": { "model": "minecraft_continuum:item/world_crystal" }
+  }
+}
