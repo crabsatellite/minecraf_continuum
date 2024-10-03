@@ -33,6 +33,13 @@ public class ItemRegister {
         // Get the list of script paths from config
         List<? extends String> scriptPaths = ModConfigHandler.pythonScriptPaths.get();
 
+        // Check if the config contains any paths
+        if (scriptPaths == null || scriptPaths.isEmpty()) {
+            // If no paths are present in the config, don't register any items
+            System.out.println("No script paths found in config, skipping item registration.");
+            return;
+        }
+
         // Loop through each script path to create a corresponding item
         for (int i = 0; i < scriptPaths.size(); i++) {
             String path = scriptPaths.get(i);
